@@ -13,6 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Headerdateien\components">
+      <UniqueIdentifier>{e7f60dd3-aed2-4326-b257-b445f0e4cd8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\entities">
+      <UniqueIdentifier>{f0a1b305-906d-4ef7-b612-5fa471a9d792}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\components">
+      <UniqueIdentifier>{69866793-3ba1-45fc-b471-a8d9d9b5b2b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\entities">
+      <UniqueIdentifier>{8289105d-b14c-4adf-96a9-44249609819b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common.h">
@@ -33,6 +45,21 @@
     <ClInclude Include="png_loader.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="scene.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="model_component.h">
+      <Filter>Headerdateien\components</Filter>
+    </ClInclude>
+    <ClInclude Include="entity.h">
+      <Filter>Headerdateien\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="component.h">
+      <Filter>Headerdateien\components</Filter>
+    </ClInclude>
+    <ClInclude Include="cube_entity.h">
+      <Filter>Headerdateien\entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="log.cc">
@@ -52,6 +79,18 @@
     </ClCompile>
     <ClCompile Include="png_loader.cc">
       <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="scene.cc">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="entity.cc">
+      <Filter>Quelldateien\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="cube_entity.cc">
+      <Filter>Quelldateien\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="model_component.cc">
+      <Filter>Quelldateien\components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

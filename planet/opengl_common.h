@@ -2,11 +2,10 @@
 
 #include <GL\glew.h>
 #include <GLFW\glfw3.h>
-#include <glm\glm.hpp>
 
 namespace planet {
-	using namespace glm;
 
+	// Base class for OpenGL objects.
 	struct OpenGLObject {
 		GLuint id;
 	};
