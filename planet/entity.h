@@ -2,53 +2,34 @@
 
 #include "common.h"
 #include "component.h"
+#include <map>
 
 namespace planet {
 
+	struct Scene;
+
 	// Entity base class.
-	class Entity {
-	private:
-		// Maximum number of components allowed per entity.
-		static constexpr u8 MAX_COMPONENTS = 16;
+	struct Entity {
 
-		// Handles to components attached to the entity.
-		struct {
-			string name;
-			Component* ptr;
-		} components[MAX_COMPONENTS] = {};
-		
-		// Number of components in use.
-		u8 componentCount = 0;
+		// Entity type name.
+		string type;
 
-	public:
-		Entity() = default;
+		// Attached components.
+		map<string, Component*> components;
 
-		// Returns a component by name.
-		inline Component* getComponent(string const& name) {
-			for (u8 i = 0; i < componentCount; ++i) {
-				if (components[i].name == name) {
-					return components[i].ptr;
-				}
-			}
-			return nullptr;
-		}
+		// Initializes the entity.
+		Entity(string const& type);
 
-		// Adds a new component to the entity.
-		inline Component* addComponent(string const& name, Component* component) {
-			if (componentCount < MAX_COMPONENTS) {
-				components[componentCount].name = name; 
-				components[componentCount].ptr = component;
-				++componentCount;
-				return component;
-			}
-			return nullptr;
-		}
-
+		// Update all components.
 		virtual void update(float dt);
 
+		// Render all components.
 		virtual void render();
 
+		// Returns all components of a given type.
+		map<string, Component*> getTypedComponents(string const& type);
+
 		// Delete attached components.
-		~Entity();
+		virtual ~Entity();
 	};
 }

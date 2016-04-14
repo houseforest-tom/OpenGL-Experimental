@@ -1,20 +1,40 @@
 #include "model_component.h"
-#include <glm/gtx/transform.hpp>
 
 namespace planet {
 
+	ModelComponent::ModelComponent(
+		Mesh* mesh,
+		OpenGLShaderProgram const* shader,
+		OrientationComponent const* orientation,
+		ViewProjComponent const* viewproj)
+		:
+		Component("Model"),
+		shader(shader),
+		orientation(orientation),
+		viewproj(viewproj),
+		mesh(mesh) 
+	{}
+
 	void ModelComponent::update(float dt) {
 		modelMatrix =
-			translate(position)
-			* rotate(rotation.x, vec3 { 1,0,0 })
-			* rotate(rotation.y, vec3 { 0,1,0 })
-			* rotate(rotation.z, vec3 { 0,0,1 })
-			* glm::scale(scale);
+			translate(orientation->position)
+			* rotate(orientation->rotation.x, vec3 { 1,0,0 })
+			* rotate(orientation->rotation.y, vec3 { 0,1,0 })
+			* rotate(orientation->rotation.z, vec3 { 0,0,1 })
+			* glm::scale(orientation->scale);
 	}
-	
+
 	void ModelComponent::render() {
-		if (mesh != nullptr) {
-			mesh->render();
-		}
+		static mat4 mvp;
+
+		mvp = viewproj->viewProjection * modelMatrix;
+		glUseProgram(shader->id);
+		glUniformMatrix4fv(
+			glGetUniformLocation(shader->id, "modelViewProj"),
+			1,
+			GL_FALSE,
+			&mvp[0][0]
+		);
+		mesh->render();
 	}
 }

@@ -128,20 +128,28 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="camera_entity.h" />
+    <ClInclude Include="deform_component.h" />
+    <ClInclude Include="viewproj_component.h" />
     <ClInclude Include="common.h" />
     <ClInclude Include="component.h" />
-    <ClInclude Include="cube_entity.h" />
+    <ClInclude Include="sphere_entity.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="mesh.h" />
     <ClInclude Include="model_component.h" />
     <ClInclude Include="opengl_buffer.h" />
     <ClInclude Include="opengl_common.h" />
     <ClInclude Include="opengl_shader.h" />
+    <ClInclude Include="orientation_component.h" />
     <ClInclude Include="png_loader.h" />
     <ClInclude Include="scene.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="cube_entity.cc" />
+    <ClCompile Include="camera_entity.cc" />
+    <ClCompile Include="deform_component.cc" />
+    <ClCompile Include="viewproj_component.cc" />
+    <ClCompile Include="component.cc" />
+    <ClCompile Include="sphere_entity.cc" />
     <ClCompile Include="entity.cc" />
     <ClCompile Include="log.cc" />
     <ClCompile Include="main.cc" />
@@ -149,6 +157,7 @@
     <ClCompile Include="model_component.cc" />
     <ClCompile Include="opengl_buffer.cc" />
     <ClCompile Include="opengl_shader.cc" />
+    <ClCompile Include="orientation_component.cc" />
     <ClCompile Include="png_loader.cc" />
     <ClCompile Include="scene.cc" />
   </ItemGroup>

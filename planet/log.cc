@@ -1,6 +1,6 @@
 #include "log.h"
 #include <iostream>
-#include <cstdint>
+#include <stdint.h>
 
 #if defined(_WIN64) || defined(_WIN32)
 #include <Windows.h>

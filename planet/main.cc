@@ -8,24 +8,19 @@
 #include "png_loader.h"
 #include "mesh.h"
 #include "scene.h"
-#include "cube_entity.h"
+#include "sphere_entity.h"
+#include "camera_entity.h"
 
 using namespace planet;
 
 class MainScene : public Scene {
 private:
-	GLFWwindow* window;
-	mat4 projectionMatrix;
-	mat4 viewMatrix;
-
-	OpenGLShader* vertexShader;
-	OpenGLShader* fragmentShader;
-	OpenGLShaderProgram* shaderProgram;
+	OpenGLShader* vertexShader = nullptr;
+	OpenGLShader* fragmentShader = nullptr;
+	OpenGLShaderProgram* shaderProgram = nullptr;
 
 public:
 	MainScene(GLFWwindow* window) {
-		this->window = window;
-		addEntity("cube", new CubeEntity());
 
 		// Create shader program.
 		vertexShader = new OpenGLShader(GL_VERTEX_SHADER);
@@ -38,26 +33,26 @@ public:
 			shaderProgram->link();
 		}
 
-		int windowWidth, windowHeight;
-		glfwGetWindowSize(window, &windowWidth, &windowHeight);
-		projectionMatrix = perspective(45.0f, (float)windowWidth / (float)windowHeight, 0.1f, 100.0f);
-		viewMatrix = lookAt(vec3 { 4,3,3 }, vec3 { 0,0,0 }, vec3 { 0,1,0 });
+		// Create main camera.
+		auto camera = new CameraEntity(window);
+		((OrientationComponent*)camera->components["orientation"])->position = { 0, 0, -5 };
+		entities["camera"] = camera;
+
+		// Create sphere.
+		auto cube = new SphereEntity(shaderProgram, (ViewProjComponent*)camera->components["viewproj"]);
+		auto cubeOrientation = (OrientationComponent*)cube->components["orientation"];
+		entities["cube"] = cube;
 	}
 
 	void update(float dt) {
-		Scene::update(dt);
-		glUniformMatrix4fv(
-			glGetUniformLocation(shaderProgram->id, "modelViewProj"),
-			1,
-			GL_FALSE,
-			&((ModelComponent*)(getEntity("cube")->getComponent("model")))->modelMatrix[0][0]
-		);
-	}
+		static float accum = 0.0f;
 
-	void render() {
-		// Use the simple shader program.
-		glUseProgram(shaderProgram->id);
-		Scene::render();
+		Scene::update(dt);
+
+		auto cameraOrientation = (OrientationComponent*)entities["camera"]->components["orientation"];
+		cameraOrientation->position.x = 5.0f * sin(accum);
+		cameraOrientation->position.z = -5.0f * cos(accum);
+		accum += dt;
 	}
 
 	~MainScene() {
@@ -116,6 +111,7 @@ int main() {
 		glEnable(GL_DEPTH_TEST);
 		glDepthFunc(GL_LESS);
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		glEnable(GL_CULL_FACE);
 	}
 
 	Scene* scene = new MainScene(window);

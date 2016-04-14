@@ -25,29 +25,20 @@
     <Filter Include="Quelldateien\entities">
       <UniqueIdentifier>{8289105d-b14c-4adf-96a9-44249609819b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headerdateien\scenes">
+      <UniqueIdentifier>{dd1bcc9e-8ae6-4bee-8d3e-e14e4c329fd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\core">
+      <UniqueIdentifier>{3d22b5ac-52b9-4e52-8df5-4db378373e2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\scenes">
+      <UniqueIdentifier>{7fb7fa83-2c76-4462-9aa5-d1d3612822b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\core">
+      <UniqueIdentifier>{e627c1fa-2c5a-48a9-a3f2-34e2690c57d8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="common.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="mesh.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="opengl_buffer.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="opengl_common.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="opengl_shader.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="png_loader.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="scene.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="model_component.h">
       <Filter>Headerdateien\components</Filter>
     </ClInclude>
@@ -57,39 +48,87 @@
     <ClInclude Include="component.h">
       <Filter>Headerdateien\components</Filter>
     </ClInclude>
-    <ClInclude Include="cube_entity.h">
+    <ClInclude Include="scene.h">
+      <Filter>Headerdateien\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="common.h">
+      <Filter>Headerdateien\core</Filter>
+    </ClInclude>
+    <ClInclude Include="mesh.h">
+      <Filter>Headerdateien\core</Filter>
+    </ClInclude>
+    <ClInclude Include="opengl_buffer.h">
+      <Filter>Headerdateien\core</Filter>
+    </ClInclude>
+    <ClInclude Include="opengl_shader.h">
+      <Filter>Headerdateien\core</Filter>
+    </ClInclude>
+    <ClInclude Include="opengl_common.h">
+      <Filter>Headerdateien\core</Filter>
+    </ClInclude>
+    <ClInclude Include="png_loader.h">
+      <Filter>Headerdateien\core</Filter>
+    </ClInclude>
+    <ClInclude Include="orientation_component.h">
+      <Filter>Headerdateien\components</Filter>
+    </ClInclude>
+    <ClInclude Include="viewproj_component.h">
+      <Filter>Headerdateien\components</Filter>
+    </ClInclude>
+    <ClInclude Include="camera_entity.h">
+      <Filter>Headerdateien\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="deform_component.h">
+      <Filter>Headerdateien\components</Filter>
+    </ClInclude>
+    <ClInclude Include="sphere_entity.h">
       <Filter>Headerdateien\entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="entity.cc">
+      <Filter>Quelldateien\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="model_component.cc">
+      <Filter>Quelldateien\components</Filter>
+    </ClCompile>
+    <ClCompile Include="scene.cc">
+      <Filter>Quelldateien\scenes</Filter>
+    </ClCompile>
     <ClCompile Include="log.cc">
-      <Filter>Quelldateien</Filter>
+      <Filter>Quelldateien\core</Filter>
+    </ClCompile>
+    <ClCompile Include="mesh.cc">
+      <Filter>Quelldateien\core</Filter>
+    </ClCompile>
+    <ClCompile Include="opengl_buffer.cc">
+      <Filter>Quelldateien\core</Filter>
+    </ClCompile>
+    <ClCompile Include="opengl_shader.cc">
+      <Filter>Quelldateien\core</Filter>
+    </ClCompile>
+    <ClCompile Include="png_loader.cc">
+      <Filter>Quelldateien\core</Filter>
+    </ClCompile>
+    <ClCompile Include="component.cc">
+      <Filter>Quelldateien\components</Filter>
+    </ClCompile>
+    <ClCompile Include="orientation_component.cc">
+      <Filter>Quelldateien\components</Filter>
+    </ClCompile>
+    <ClCompile Include="viewproj_component.cc">
+      <Filter>Quelldateien\components</Filter>
+    </ClCompile>
+    <ClCompile Include="camera_entity.cc">
+      <Filter>Quelldateien\entities</Filter>
     </ClCompile>
     <ClCompile Include="main.cc">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="mesh.cc">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="opengl_buffer.cc">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="opengl_shader.cc">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="png_loader.cc">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="scene.cc">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="entity.cc">
+    <ClCompile Include="sphere_entity.cc">
       <Filter>Quelldateien\entities</Filter>
     </ClCompile>
-    <ClCompile Include="cube_entity.cc">
-      <Filter>Quelldateien\entities</Filter>
-    </ClCompile>
-    <ClCompile Include="model_component.cc">
+    <ClCompile Include="deform_component.cc">
       <Filter>Quelldateien\components</Filter>
     </ClCompile>
   </ItemGroup>

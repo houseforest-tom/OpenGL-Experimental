@@ -2,23 +2,32 @@
 
 
 namespace planet {
-	
+
 	void Scene::update(float dt) {
-		for (u16 i=0; i<entityCount; ++i){
-			entities[i].ptr->update(dt);
+		for (auto& entity : entities) {
+			entity.second->update(dt);
 		}
 	}
 
 	void Scene::render() {
-		for (u16 i = 0; i<entityCount; ++i) {
-			entities[i].ptr->render();
+		for (auto& entity : entities) {
+			entity.second->render();
 		}
 	}
 
+	map<string, Entity*> Scene::getTypedEntities(string const& type) {
+		map<string, Entity*> result;
+		for (auto const& entity : entities) {
+			if (entity.second->type == type) {
+				result.insert(entity);
+			}
+		}
+		return result;
+	}
+
 	Scene::~Scene() {
-		for (u16 i = entityCount - 1; i >= 0; --i) {
-			delete entities[i].ptr;
-			--entityCount;
+		for (auto& entity : entities) {
+			delete entity.second;
 		}
 	}
 }
