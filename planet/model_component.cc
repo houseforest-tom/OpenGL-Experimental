@@ -8,7 +8,6 @@ namespace planet {
 		OrientationComponent const* orientation,
 		ViewProjComponent const* viewproj)
 		:
-		Component("Model"),
 		shader(shader),
 		orientation(orientation),
 		viewproj(viewproj),
@@ -27,7 +26,7 @@ namespace planet {
 	void ModelComponent::render() {
 		static mat4 mvp;
 
-		mvp = viewproj->viewProjection * modelMatrix;
+		mvp = viewproj->getMatrix() * modelMatrix;
 		glUseProgram(shader->id);
 		glUniformMatrix4fv(
 			glGetUniformLocation(shader->id, "modelViewProj"),

@@ -86,9 +86,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="entity.cc">
-      <Filter>Quelldateien\entities</Filter>
-    </ClCompile>
     <ClCompile Include="model_component.cc">
       <Filter>Quelldateien\components</Filter>
     </ClCompile>
@@ -109,12 +106,6 @@
     </ClCompile>
     <ClCompile Include="png_loader.cc">
       <Filter>Quelldateien\core</Filter>
-    </ClCompile>
-    <ClCompile Include="component.cc">
-      <Filter>Quelldateien\components</Filter>
-    </ClCompile>
-    <ClCompile Include="orientation_component.cc">
-      <Filter>Quelldateien\components</Filter>
     </ClCompile>
     <ClCompile Include="viewproj_component.cc">
       <Filter>Quelldateien\components</Filter>

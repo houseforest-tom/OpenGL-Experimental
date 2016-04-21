@@ -3,8 +3,8 @@
 #include "component.h"
 
 namespace planet {
-	class OrientationComponent : public Component {
-	public:
+	struct OrientationComponent : public Component {
+
 		// Translation on X, Y and Z axes.
 		vec3 position = { 0,0,0 };
 
@@ -13,7 +13,5 @@ namespace planet {
 
 		// Scale factor along X, Y and Z axes.
 		vec3 scale = { 1,1,1 };
-
-		OrientationComponent();
 	};
 }

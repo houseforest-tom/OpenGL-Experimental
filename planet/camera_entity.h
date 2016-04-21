@@ -5,9 +5,17 @@
 
 namespace planet {
 	class CameraEntity : public Entity {
-	public:
-		CameraEntity(GLFWwindow* window);
+	private:
+		OrientationComponent *orientation;
+		ViewProjComponent    *viewproj;
 
-		~CameraEntity() = default;
+	public:
+		CameraEntity(GLFWwindow *window);
+
+		virtual void update(float dt) override;
+		virtual ~CameraEntity();
+
+		inline OrientationComponent *getOrientation() { return orientation; }
+		inline ViewProjComponent    *getViewProjection() { return viewproj; }
 	};
 }

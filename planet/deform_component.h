@@ -5,10 +5,12 @@
 namespace planet {
 	class DeformComponent : public Component {
 	private:
-		OrientationComponent* orientation;
-
+		// Orientation component to apply the deformation to.
+		OrientationComponent *orientation;
+	
 	public:
-		DeformComponent(OrientationComponent* orientation);
+		DeformComponent(OrientationComponent *orientation);
+
 		void update(float dt);
 	};
 }

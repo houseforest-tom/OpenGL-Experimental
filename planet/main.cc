@@ -15,12 +15,12 @@ using namespace planet;
 
 class MainScene : public Scene {
 private:
-	OpenGLShader* vertexShader = nullptr;
-	OpenGLShader* fragmentShader = nullptr;
-	OpenGLShaderProgram* shaderProgram = nullptr;
+	OpenGLShader        *vertexShader;
+	OpenGLShader        *fragmentShader;
+	OpenGLShaderProgram *shaderProgram;
 
 public:
-	MainScene(GLFWwindow* window) {
+	MainScene(GLFWwindow *window) {
 
 		// Create shader program.
 		vertexShader = new OpenGLShader(GL_VERTEX_SHADER);
@@ -34,25 +34,13 @@ public:
 		}
 
 		// Create main camera.
-		auto camera = new CameraEntity(window);
-		((OrientationComponent*)camera->components["orientation"])->position = { 0, 0, -5 };
-		entities["camera"] = camera;
+		CameraEntity *camera = new CameraEntity(window);
+		camera->getOrientation()->position = { 0, 0, -5 };
+		addEntity(camera);
 
 		// Create sphere.
-		auto cube = new SphereEntity(shaderProgram, (ViewProjComponent*)camera->components["viewproj"]);
-		auto cubeOrientation = (OrientationComponent*)cube->components["orientation"];
-		entities["cube"] = cube;
-	}
-
-	void update(float dt) {
-		static float accum = 0.0f;
-
-		Scene::update(dt);
-
-		auto cameraOrientation = (OrientationComponent*)entities["camera"]->components["orientation"];
-		cameraOrientation->position.x = 5.0f * sin(accum);
-		cameraOrientation->position.z = -5.0f * cos(accum);
-		accum += dt;
+		SphereEntity *sphere = new SphereEntity(shaderProgram, camera->getViewProjection());
+		addEntity(sphere);
 	}
 
 	~MainScene() {
@@ -114,7 +102,7 @@ int main() {
 		glEnable(GL_CULL_FACE);
 	}
 
-	Scene* scene = new MainScene(window);
+	MainScene *scene = new MainScene(window);
 
 	// Main loop.
 	while (!glfwWindowShouldClose(window)) {

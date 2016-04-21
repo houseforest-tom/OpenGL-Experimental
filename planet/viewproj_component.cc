@@ -1,9 +1,11 @@
 #include "viewproj_component.h"
 
-planet::ViewProjComponent::ViewProjComponent(mat4 const& projection, OrientationComponent* orientation)
-	: planet::Component("Camera"), projection(projection), orientation(orientation) {
-}
+namespace planet {
 
-void planet::ViewProjComponent::update(float dt) {
-	viewProjection = projection * glm::lookAt(orientation->position, orientation->position + forward, up);
+	ViewProjComponent::ViewProjComponent(mat4 const &projection, OrientationComponent* orientation)
+		: orientation(orientation), projection(projection) {}
+
+	void ViewProjComponent::update(float dt) {
+		viewProjMatrix = projection * glm::lookAt(orientation->position, orientation->position + forward, up);
+	}
 }

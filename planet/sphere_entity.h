@@ -1,20 +1,24 @@
 #include "entity.h"
+#include "orientation_component.h"
 #include "model_component.h"
+#include "deform_component.h"
 
 namespace planet {
 	class SphereEntity : public Entity {
 	private:
-		// Spherical mesh.
-		Mesh* mesh = nullptr;
-
-		// Returns a point on a sphere.
+		// Returns a point on the unit sphere.
 		vec3 getUnitSpherePoint(float theta, float phi);
 
-	public:
-		// Create the mesh for the sphere.
-		SphereEntity(OpenGLShaderProgram* shader, ViewProjComponent const* viewproj);
+		Mesh                 *mesh;
+		OrientationComponent *orientation;
+		ModelComponent       *model;
+		DeformComponent      *deform;
 
-		// Delete the sphere mesh.
+	public:
+		// Creates the sphere mesh.
+		SphereEntity(OpenGLShaderProgram const *shader, ViewProjComponent const *viewproj);
+		virtual void update(float dt) override;
+		virtual void render() override;
 		~SphereEntity();
 	};
 }

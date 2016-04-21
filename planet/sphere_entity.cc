@@ -8,16 +8,22 @@ namespace planet {
 		return { sin(theta) * cos(phi), cos(theta), sin(theta) * sin(phi) };
 	}
 
-	SphereEntity::SphereEntity(OpenGLShaderProgram* shader, ViewProjComponent const* viewproj)
-		: Entity("Sphere") {
+	float getTheta(u32 latitudeNo, u32 longitudeNo, const u32 tesselation) {
+		return latitudeNo * 3.14159265f / tesselation;
+	}
 
+	float getPhi(u32 latitudeNo, u32 longitudeNo, const u32 tesselation) {
+		return 2 * longitudeNo * 3.14159265f / tesselation;
+	}
+
+	SphereEntity::SphereEntity(OpenGLShaderProgram const *shader, ViewProjComponent const *viewproj) {
 		mesh = new Mesh();
+		orientation = new OrientationComponent();
+		deform = new DeformComponent(orientation);
+		model = new ModelComponent(mesh, shader, orientation, viewproj);
 		
-		constexpr u32 n = 100;
+		constexpr u32 n = 32;
 		constexpr u32 nsqr = n * n;
-		constexpr float PI = 3.14159265f;
-		constexpr float latitudeStep = PI / n;
-		constexpr float longitudeStep = latitudeStep + latitudeStep;
 		u32 latitudeNo = 0, longitudeNo = 0, normalNo = 0, indexNo = 0;
 
 		constexpr u32 vertexCount = 4 * nsqr;
@@ -26,10 +32,7 @@ namespace planet {
 		u16* indices = new u16[indexCount];
 
 		for (latitudeNo = 0; latitudeNo < n; ++latitudeNo) {
-			float theta = latitudeNo * latitudeStep;
-
 			for (longitudeNo = 0; longitudeNo < n; ++longitudeNo) {
-				float phi = longitudeNo * longitudeStep;
 
 				/*
 					2--1	1: (theta,  phi)
@@ -39,10 +42,10 @@ namespace planet {
 				*/
 
 				u32 normalBase = normalNo;
-				normals[normalNo++] = getUnitSpherePoint(theta, phi); 
-				normals[normalNo++] = getUnitSpherePoint(theta, phi + longitudeStep); 
-				normals[normalNo++] = getUnitSpherePoint(theta + latitudeStep, phi + longitudeStep);
-				normals[normalNo++] = getUnitSpherePoint(theta + latitudeStep, phi);
+				normals[normalNo++] = getUnitSpherePoint(getTheta(latitudeNo,     longitudeNo, n), getPhi(latitudeNo, longitudeNo,     n));
+				normals[normalNo++] = getUnitSpherePoint(getTheta(latitudeNo,     longitudeNo, n), getPhi(latitudeNo, longitudeNo + 1, n));
+				normals[normalNo++] = getUnitSpherePoint(getTheta(latitudeNo + 1, longitudeNo, n), getPhi(latitudeNo, longitudeNo + 1, n));
+				normals[normalNo++] = getUnitSpherePoint(getTheta(latitudeNo + 1, longitudeNo, n), getPhi(latitudeNo, longitudeNo,     n));
 
 				// Close the top of the sphere.
 				if (latitudeNo == 0) { 
@@ -91,13 +94,21 @@ namespace planet {
 			indexCount,
 			GL_STATIC_DRAW
 		);
+	}
 
-		components["orientation"] = new OrientationComponent();
-		components["deform"] = new DeformComponent((OrientationComponent*)components["orientation"]);
-		components["model"] = new ModelComponent(mesh, shader, (OrientationComponent*)components["orientation"], viewproj);
+	void SphereEntity::update(float dt) {
+		model->update(dt);
+		deform->update(dt);
+	}
+
+	void SphereEntity::render() {
+		model->render();
 	}
 
 	SphereEntity::~SphereEntity() {
+		delete model;
+		delete deform;
+		delete orientation;
 		delete mesh;
 	}
 }
