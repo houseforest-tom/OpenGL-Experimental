@@ -74,12 +74,6 @@ namespace planet {
 		glBindVertexArray(0);
 	}
 
-	void Mesh::render() {
-		glBindVertexArray(vao->id);
-		glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_SHORT, nullptr);
-		glBindVertexArray(0);
-	}
-
 	Mesh::~Mesh() {
 		glBindVertexArray(vao->id);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);

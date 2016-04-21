@@ -94,6 +94,10 @@ namespace planet {
 			indexCount,
 			GL_STATIC_DRAW
 		);
+
+		logMessage("Generated sphere mesh of tesselation " + to_string(n));
+		logMessage("Vertices: " + to_string(vertexCount) + " (" + to_string(vertexCount * sizeof(Vertex) / (1 << 10)) + " kB)");
+		logMessage("Indices:  " + to_string(indexCount)  + " (" + to_string(indexCount  * sizeof(u16)    / (1 << 10)) + " kB)");
 	}
 
 	void SphereEntity::update(float dt) {

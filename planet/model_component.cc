@@ -34,6 +34,9 @@ namespace planet {
 			GL_FALSE,
 			&mvp[0][0]
 		);
-		mesh->render();
+
+		glBindVertexArray(mesh->vao->id);
+		glDrawElements(GL_TRIANGLES, mesh->getIndexCount(), GL_UNSIGNED_SHORT, nullptr);
+		glBindVertexArray(0);
 	}
 }

@@ -14,20 +14,22 @@ namespace planet {
 
 	class Mesh {
 	private:
-		Vertex* vertices;
-		u16 vertexCount;
-		u16* indices;
-		u16 indexCount;
+		Vertex *vertices;
+		u16    vertexCount;
+		u16    *indices;
+		u16    indexCount;
 
 	public:
-		OpenGLVertexArray* vao;
-		OpenGLBuffer* vbo;
-		OpenGLBuffer* ibo;
+		OpenGLVertexArray *vao;
+		OpenGLBuffer      *vbo;
+		OpenGLBuffer      *ibo;
 
 		Mesh();
 		void updateVertexBuffer(Vertex* vertices, u16 count, GLenum usage);
 		void updateIndexBuffer(u16* indices, u16 count, GLenum usage);
-		void render();
 		~Mesh();
+
+		inline u16 getVertexCount() const { return vertexCount; }
+		inline u16 getIndexCount()  const { return indexCount; }
 	};
 }
