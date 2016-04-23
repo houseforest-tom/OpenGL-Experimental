@@ -37,6 +37,12 @@
     <Filter Include="Quelldateien\core">
       <UniqueIdentifier>{e627c1fa-2c5a-48a9-a3f2-34e2690c57d8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headerdateien\input">
+      <UniqueIdentifier>{4e938a3a-5554-4307-84f2-f1f494f273bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\input">
+      <UniqueIdentifier>{2a214802-38ab-43af-a43a-09d1b105ccd7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="model_component.h">
@@ -84,6 +90,9 @@
     <ClInclude Include="sphere_entity.h">
       <Filter>Headerdateien\entities</Filter>
     </ClInclude>
+    <ClInclude Include="input.h">
+      <Filter>Headerdateien\input</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="model_component.cc">
@@ -121,6 +130,9 @@
     </ClCompile>
     <ClCompile Include="deform_component.cc">
       <Filter>Quelldateien\components</Filter>
+    </ClCompile>
+    <ClCompile Include="input.cc">
+      <Filter>Quelldateien\input</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

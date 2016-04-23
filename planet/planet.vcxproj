@@ -130,6 +130,7 @@
   <ItemGroup>
     <ClInclude Include="camera_entity.h" />
     <ClInclude Include="deform_component.h" />
+    <ClInclude Include="input.h" />
     <ClInclude Include="viewproj_component.h" />
     <ClInclude Include="common.h" />
     <ClInclude Include="component.h" />
@@ -147,6 +148,7 @@
   <ItemGroup>
     <ClCompile Include="camera_entity.cc" />
     <ClCompile Include="deform_component.cc" />
+    <ClCompile Include="input.cc" />
     <ClCompile Include="viewproj_component.cc" />
     <ClCompile Include="sphere_entity.cc" />
     <ClCompile Include="log.cc" />

@@ -10,6 +10,7 @@
 #include "scene.h"
 #include "sphere_entity.h"
 #include "camera_entity.h"
+#include "input.h"
 
 using namespace planet;
 
@@ -35,11 +36,17 @@ public:
 
 		// Create main camera.
 		CameraEntity *camera = new CameraEntity(window);
-		camera->getOrientation()->position = { 0, 0, -5 };
+		camera->getOrientation()->position = { 0, 0, -3 };
 		addEntity(camera);
 
 		// Create sphere.
-		SphereEntity *sphere = new SphereEntity(shaderProgram, camera->getViewProjection());
+		SphereEntity *sphere = new SphereEntity(
+			10,
+			20,
+			2.0f,
+			0.2f,
+			shaderProgram, 
+			camera->getViewProjection());
 		addEntity(sphere);
 	}
 
@@ -80,8 +87,6 @@ int main() {
 	else {
 		logMessage("Successfully created window.");
 		glfwMakeContextCurrent(window);
-		glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
-		glfwSetInputMode(window, GLFW_STICKY_MOUSE_BUTTONS, GL_TRUE);
 	}
 
 	// Initialize GLEW library.
@@ -100,9 +105,11 @@ int main() {
 		glDepthFunc(GL_LESS);
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		glEnable(GL_CULL_FACE);
+		glCullFace(GL_BACK);
 	}
 
 	MainScene *scene = new MainScene(window);
+	Input::install(window);
 
 	// Main loop.
 	while (!glfwWindowShouldClose(window)) {
@@ -118,8 +125,10 @@ int main() {
 
 		scene->render();
 
+		Input::update(1 / 60.f);
+
 		// Quit upon [ESC] press.
-		if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+		if (Input::getKeyDownDuration(GLFW_KEY_ESCAPE) >= 0.5f) {
 			glfwSetWindowShouldClose(window, true);
 		}
 	}
